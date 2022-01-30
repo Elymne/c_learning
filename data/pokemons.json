@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "name": "bulbasaur",
+        "type_1": 4,
+        "type_2": 5,
+        "next_evolution": 2
+    },
+    {
+        "id": 2,
+        "name": "ivysaur",
+        "type_1": 4,
+        "type_2": 5,
+        "next_evolution": 3
+    },
+    {
+        "id": 3,
+        "name": "venusaur",
+        "type_1": 4,
+        "type_2": 5,
+        "next_evolution": 0
+    }
+]

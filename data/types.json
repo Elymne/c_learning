@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "normal"
+    },
+    {
+        "id": 2,
+        "name": "water"
+    },
+    {
+        "id": 3,
+        "name": "fire"
+    },
+    {
+        "id": 4,
+        "name": "grass"
+    },
+    {
+        "id": 5,
+        "name": "poison"
+    }
+]
