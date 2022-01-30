@@ -13,6 +13,7 @@ const jsmntok_t *parseJson(const char *file_content);
 const char *readJsonFile(const char *filename) {
     long file_size = fsize(filename);
     if (file_size == -1) return NULL;
+
     char *file_content = (char *)malloc(file_size);
     FILE *json_file = fopen(filename, "rb");
     fread(file_content, sizeof(char), file_size, json_file);
@@ -26,12 +27,16 @@ off_t fsize(const char *filename) {
 }
 
 const jsmntok_t *parseJson(const char *file_content) {
-    jsmn_parser parser;
-    jsmn_init(&parser);
-    int num_tokkens = jsmn_parse(&parser, file_content, strlen(file_content), NULL, -1);
+    jsmn_parser parser_to_count;
+    jsmn_init(&parser_to_count);
+    int num_tokkens = jsmn_parse(&parser_to_count, file_content, strlen(file_content), NULL, -1);
 
     jsmntok_t *tokens = malloc(sizeof(jsmntok_t) * num_tokkens);
-    jsmn_parse(&parser, file_content, strlen(file_content), tokens, num_tokkens);
+    jsmn_parser parser;
+    jsmn_init(&parser);
+    int r = jsmn_parse(&parser, file_content, strlen(file_content), tokens, num_tokkens);
+
+    if (r < 0) printf("%s", "Error has occured while parsing json file. \n");
 
     return tokens;
 }
