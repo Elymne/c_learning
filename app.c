@@ -7,11 +7,11 @@
 #include "./src/file_helper.h"
 
 int main(void) {
-    const char* file_content = readJsonFile("data/pokemon.json");
-    const jsmntok_t* parsedJson = parseJson(file_content);
+    char* file_content = readJsonFile("data/pokemons.json");
+    json_response response = parseJson(file_content);
 
     free((char*)file_content);
-    free((jsmntok_t*)parsedJson);
+    free((jsmntok_t*)response.data);
 
     return 1;
 }
