@@ -4,14 +4,14 @@
 #include <sys/types.h>
 
 #include "./external_lib/jsmn.h"
-#include "./src/file_helper.h"
+#include "./src/datafinders/file_helper.h"
 
 int main(void) {
     char* file_content = readJsonFile("data/pokemons.json");
     json_response response = parseJson(file_content);
 
     free((char*)file_content);
-    free((jsmntok_t*)response.data);
+    free((jsmntok_t*)response.tokens);
 
     return 1;
 }
