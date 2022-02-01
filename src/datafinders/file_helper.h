@@ -6,16 +6,18 @@
 
 #include "../../external_lib/jsmn.h"
 
-typedef struct {
+typedef struct json_response {
     int nb;
     jsmntok_t *tokens;
     char *file_content;
 } json_response;
 
-const char *readJsonFile(const char *filename);
-const json_response parseJson(const char *file_content);
-int jsoneq(const char *json, jsmntok_t *tok, const char *s);
-static off_t fsize(const char *filename);
+char *readJsonFile(char *filename);
+json_response parseJson(char *file_content);
+int jsoneq(char *json, jsmntok_t *tok, char *s);
+char *read_token(char *file_content, int from, int to);
+
+static off_t fsize(char *filename);
 
 /**
  * @brief Use it to return string data of a file.
@@ -23,7 +25,7 @@ static off_t fsize(const char *filename);
  * @param filename String value of filename to read.
  * @return String content of file.
  */
-const char *readJsonFile(const char *filename) {
+char *readJsonFile(char *filename) {
     long file_size = fsize(filename);
     if (file_size == -1) return NULL;
 
@@ -40,7 +42,7 @@ const char *readJsonFile(const char *filename) {
  * @param file_content String value of file content.
  * @return Response stucture.
  */
-const json_response parseJson(const char *file_content) {
+json_response parseJson(char *file_content) {
     jsmn_parser parser_to_count;
     jsmn_init(&parser_to_count);
     int num_tokkens = jsmn_parse(&parser_to_count, file_content, strlen(file_content), NULL, -1);
@@ -61,14 +63,28 @@ const json_response parseJson(const char *file_content) {
  * @param file_content String content of a file from json_response struct.
  * @param tokens Array of tokens from a json_response struct.
  * @param s
- * @return const int
+ * @return  int
  */
-const int check_tokken_value(const char *file_content, jsmntok_t *tokens, const char *key) {
+int check_tokken_value(char *file_content, jsmntok_t *tokens, char *key) {
     if (tokens->type == JSMN_STRING && (int)strlen(key) == tokens->end - tokens->start &&
         strncmp(file_content + tokens->start, key, tokens->end - tokens->start) == 0) {
         return 1;
     }
     return 0;
+}
+
+/**
+ * @brief Get a string from first char to last char in a complete string content of file.
+ *
+ * @param file_content String content of file.
+ * @param from First char to get
+ * @param to Last char to get
+ * @return String value
+ */
+char *read_token(char *file_content, int start, int end) {
+    char *value = (char *)malloc(sizeof(char) * (end - start));
+    strncpy(value, file_content + start, end - start);
+    return value;
 }
 
 /**
@@ -80,7 +96,7 @@ const int check_tokken_value(const char *file_content, jsmntok_t *tokens, const 
  * @param filename String taht reprensent name of the file.
  * @return A long value that represent the size.
  */
-static const off_t fsize(const char *filename) {
+static off_t fsize(char *filename) {
     struct stat st;
     if (stat(filename, &st) == 0) return st.st_size;
     return -1;
