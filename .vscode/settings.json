@@ -1,8 +1,9 @@
 {
     "files.associations": {
-        "array": "cpp",
-        "string": "cpp",
-        "string_view": "cpp",
-        "jsmn.h": "c"
+        "file_helper.h": "c",
+        "stat.h": "c",
+        "pokemon.h": "c",
+        "compare": "c",
+        "type_traits": "c"
     }
 }
