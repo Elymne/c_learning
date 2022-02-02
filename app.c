@@ -11,11 +11,13 @@ int main(void) {
     char* file_content = readJsonFile("data/pokemons.json");
     json_response response = parseJson(file_content);
 
-    pokemon poki = find_pokemon_by_id(response, 1);
-    printf("%s", poki.name);
+    pokemon test_1 = find_pokemon_by_id(response, 1);
+    printf("Founded pokemon by id : %s\n", test_1.name);
 
-    free((char*)file_content);
-    free((jsmntok_t*)response.tokens);
+    printf("\n");
+
+    pokemon test_2 = find_pokemon_by_name(response, test_1.name);
+    printf("Founded pokemon by name : %s\n", test_2.name);
 
     return 1;
 }

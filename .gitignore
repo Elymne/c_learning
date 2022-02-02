@@ -32,3 +32,6 @@ relative/path/to/dir/anotherfile
 
 # Ignore compiled file app
 app
+
+# Ignore this shit too.
+/.vscode/*
