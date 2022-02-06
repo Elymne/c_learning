@@ -1,0 +1,7 @@
+Just use "make" command to compile all project code.
+
+Then use "./app" to execute.
+
+Recap :
+    make
+    ./app

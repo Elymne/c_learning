@@ -35,3 +35,6 @@ app
 
 # Ignore this shit too.
 /.vscode/*
+
+# Don't ignore readme.
+!README
