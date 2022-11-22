@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "file_helper.h": "c",
-        "stat.h": "c",
-        "pokemon.h": "c",
-        "compare": "c",
-        "type_traits": "c"
-    }
-}

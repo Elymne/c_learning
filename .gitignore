@@ -34,7 +34,9 @@ relative/path/to/dir/anotherfile
 app
 
 # Ignore this shit too.
-/.vscode/*
+/.vscode
 
 # Don't ignore readme.
 !README
+
+!makefile
